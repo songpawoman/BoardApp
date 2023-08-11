@@ -37,30 +37,38 @@ input[type=submit]:hover {
   padding: 20px;
 }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<!-- JQuery 라이브러리가 들어있는 js 파일을 네트워크상으로 다운로드 받은 상태이므로 
+	이 시점 부터는 Jquery 사용이 가능..
+-->
+<script type="text/javascript">
+function init(){
+	$("#bt").click(function(){
+		//현재 폼을 서버로 전송하자 (서버의 요청을 받는 jsp에게 요청을 시도하자)
+		$("#form1").attr("action","/board/regist.jsp"); //서버에 요청할 주소
+		$("#form1").attr("method","post"); //전송 방법 (post , get)
+		$("#form1").submit();
+	});	
+}
+
+$(function(){ //문서가 로드되면..
+	init();
+});
+</script>
 </head>
 <body>
 
 <h3>Contact Form</h3>
 
 <div class="container">
-  <form action="/action_page.php">
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-    <label for="country">Country</label>
-    <select id="country" name="country">
-      <option value="australia">Australia</option>
-      <option value="canada">Canada</option>
-      <option value="usa">USA</option>
-    </select>
-
-    <label for="subject">Subject</label>
-    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
-    <input type="submit" value="Submit">
+  <form id="form1">
+  	<!-- name은 전송시 전송변수의 역할을 수행할 수 있다.. 
+  			즉 전송 파라미터가 될 수 있다
+  	 -->
+    <input type="text" name="title" placeholder="제목을 입력하세요">
+    <input type="text" name="writer" placeholder="작성자 입력..">
+    <textarea name="content" placeholder="내용입력.." style="height:200px"></textarea>
+    <input type="button" id="bt" value="전송">
   </form>
 </div>
 
